@@ -1,0 +1,1341 @@
+/* =========================================================
+   ELEVO – all styles in one file
+   Part 1: shared styles (colours, dark mode, buttons)
+   Part 2: landing page   Part 3: registration   Part 4: chat
+   (theme colors, reset, buttons, logo, theme toggle)
+   ========================================================= */
+
+/* ---------- 1. Theme colors (CSS variables) ---------- */
+:root {
+    --bg: #eef0f7;
+    --surface: #ffffff;
+    --ink: #121633;
+    --muted: #5d6385;
+    --line: #dde1ee;
+    --brand: #2f4bff;
+    --brand-ink: #ffffff;
+    --soft: #e6e9f4;
+    --bot: #e6e9f4;
+    --success: #1b8a4b;
+    --danger: #c62828;
+    --font: "Sora", "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+}
+
+/* Dark theme: same variable names, new values */
+:root[data-theme="dark"] {
+    --bg: #0e1124;
+    --surface: #161a35;
+    --ink: #e9ebf7;
+    --muted: #9aa0c4;
+    --line: #262b4d;
+    --brand: #7d8cff;
+    --brand-ink: #0e1124;
+    --soft: #20254a;
+    --bot: #20254a;
+    --success: #5fd38d;
+    --danger: #ff8a80;
+}
+
+/* ---------- 2. Reset ---------- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font);
+    background-color: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+img,
+svg {
+    max-width: 100%;
+}
+
+a {
+    color: inherit;
+}
+
+/* ---------- 3. Shared pieces ---------- */
+.logo {
+    width: 36px;
+    height: 36px;
+    flex: none;
+    border-radius: 10px;
+    background: var(--brand);
+    color: var(--brand-ink);
+    display: grid;
+    place-items: center;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px 20px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--ink);
+    font: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s, border-color 0.2s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    border-color: var(--brand);
+}
+
+.btn.primary {
+    background: var(--brand);
+    border-color: var(--brand);
+    color: var(--brand-ink);
+}
+
+.icon-btn {
+    width: 38px;
+    height: 38px;
+    flex: none;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--ink);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    font: inherit;
+}
+
+.icon-btn:hover {
+    background: var(--soft);
+}
+
+/* Theme toggle shows a moon in light mode and a sun in dark mode */
+.theme-toggle .icon-sun { display: none; }
+:root[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+:root[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+
+/* Visible keyboard focus everywhere */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Respect users who turn off animations */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* #########################################################
+   LANDING PAGE (index.html)
+   Every rule starts with .page-landing, so it only affects that page.
+   ######################################################### */
+
+/* =========================================================
+   ELEVO – Product landing page (index.html)
+   Mobile first: phone styles below, bigger screens in the
+   media queries at the end.
+   Flexbox: navbar, hero, buttons, footer
+   Grid:    features, steps, modes
+   ========================================================= */
+/* ---------- 1. Navbar (Flexbox) ---------- */
+.page-landing .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px 16px;
+    padding: 12px 20px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
+}
+.page-landing .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+.page-landing .brand-name {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+}
+.page-landing .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.page-landing .nav-cta {
+    padding: 8px 16px;
+    font-size: 14px;
+}
+/* On phones the links sit on their own row under the logo */
+.page-landing .nav-links {
+    order: 3;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 22px;
+    font-size: 14px;
+}
+.page-landing .nav-links a {
+    text-decoration: none;
+    color: var(--muted);
+}
+.page-landing .nav-links a:hover {
+    color: var(--ink);
+}
+/* ---------- 2. Hero (Flexbox: column on phones) ---------- */
+.page-landing .hero {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    padding: 48px 20px;
+    max-width: 1180px;
+    margin: 0 auto;
+}
+.page-landing .hero h1 {
+    font-size: 40px;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin: 0 0 16px;
+}
+.page-landing .hero-text > p {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 34em;
+    margin: 0 0 24px;
+}
+.page-landing .hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.page-landing .hero-facts {
+    list-style: none;
+    padding: 0;
+    margin: 28px 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+    font-size: 14px;
+    color: var(--muted);
+}
+.page-landing .hero-facts strong {
+    color: var(--ink);
+    font-size: 18px;
+    margin-right: 4px;
+}
+/* Product preview card */
+.page-landing .preview {
+    width: 100%;
+    max-width: 440px;
+    align-self: center;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    overflow: hidden;
+    animation: float-in 0.8s ease-out both;
+}
+@keyframes float-in {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+.page-landing .preview-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    font-size: 14px;
+}
+.page-landing .logo.small {
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+}
+.page-landing .preview-status {
+    margin-left: auto;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0;
+    color: var(--muted);
+}
+.page-landing .preview-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 16px;
+}
+.page-landing .msg {
+    margin: 0;
+    padding: 10px 14px;
+    border-radius: 14px;
+    font-size: 14px;
+    max-width: 85%;
+}
+.page-landing .msg.user {
+    align-self: flex-end;
+    background: var(--brand);
+    color: var(--brand-ink);
+    border-bottom-right-radius: 4px;
+}
+.page-landing .msg.bot {
+    align-self: flex-start;
+    background: var(--soft);
+    border-bottom-left-radius: 4px;
+}
+/* ---------- 3. Sections ---------- */
+.page-landing .section {
+    padding: 56px 20px;
+    max-width: 1180px;
+    margin: 0 auto;
+}
+.page-landing .section.alt {
+    max-width: none;
+    background: var(--surface);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+}
+.page-landing .section-title {
+    font-size: 28px;
+    line-height: 1.2;
+    text-align: center;
+    margin: 0 0 10px;
+}
+.page-landing .section-lead {
+    text-align: center;
+    color: var(--muted);
+    max-width: 36em;
+    margin: 0 auto 32px;
+}
+.page-landing .card {
+    padding: 22px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--surface);
+    transition: transform 0.3s, border-color 0.3s;
+}
+.page-landing .card:hover {
+    transform: translateY(-5px);
+    border-color: var(--brand);
+}
+.page-landing .card h3 {
+    margin: 12px 0 6px;
+    font-size: 18px;
+}
+.page-landing .card p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 15px;
+}
+.page-landing .card-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    background: var(--soft);
+    color: var(--brand);
+}
+/* ---------- 4. Features (Grid: 1 column on phones) ---------- */
+.page-landing .features-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+}
+/* ---------- 5. Steps (Grid) ---------- */
+.page-landing .steps-grid {
+    list-style: none;
+    padding: 0;
+    margin: 32px auto 0;
+    max-width: 1140px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+}
+.page-landing .step {
+    padding: 22px;
+    border-radius: 14px;
+    background: var(--bg);
+}
+.page-landing .step-number {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--brand);
+    color: var(--brand-ink);
+    font-weight: 700;
+}
+.page-landing .step h3 {
+    margin: 12px 0 6px;
+    font-size: 18px;
+}
+.page-landing .step p {
+    margin: 0;
+    color: var(--muted);
+}
+/* ---------- 6. Modes (Grid) ---------- */
+.page-landing .modes-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin-top: 32px;
+}
+.page-landing .mode-card {
+    display: flex;
+    flex-direction: column;
+}
+.page-landing .mode-card h3 {
+    margin-top: 0;
+}
+.page-landing .mode-card .mode-price {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 0 0 12px;
+}
+.page-landing .mode-card ul {
+    padding-left: 18px;
+    margin: 0 0 20px;
+    color: var(--muted);
+    flex: 1;
+}
+.page-landing .mode-card.featured {
+    border: 2px solid var(--brand);
+}
+.page-landing .mode-badge {
+    align-self: flex-start;
+    margin: 0 0 10px !important;
+    padding: 2px 10px;
+    border-radius: 999px;
+    background: var(--brand);
+    color: var(--brand-ink) !important;
+    font-size: 12px !important;
+    font-weight: 600;
+}
+/* ---------- 7. Call to action ---------- */
+.page-landing .cta {
+    text-align: center;
+    padding: 56px 20px 64px;
+}
+.page-landing .cta h2 {
+    font-size: 26px;
+    margin: 0 0 20px;
+}
+/* ---------- 8. Footer (Flexbox: stacked on phones) ---------- */
+.page-landing .footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 24px 20px;
+    border-top: 1px solid var(--line);
+    background: var(--surface);
+    font-size: 14px;
+    color: var(--muted);
+    text-align: center;
+}
+.page-landing .footer p {
+    margin: 0;
+}
+.page-landing .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 18px;
+}
+.page-landing .footer-links a {
+    text-decoration: none;
+}
+.page-landing .footer-links a:hover {
+    color: var(--ink);
+}
+/* =========================================================
+   TABLET: 600px and wider
+   ========================================================= */
+@media (min-width: 600px) {
+    .page-landing .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+/* =========================================================
+   DESKTOP: 768px and wider
+   ========================================================= */
+@media (min-width: 768px) {
+    .page-landing .navbar {
+        flex-wrap: nowrap;
+        padding: 14px 32px;
+    }
+    .page-landing .nav-links {
+        order: 0;
+        width: auto;
+    }
+    .page-landing .hero {
+        flex-direction: row;
+        align-items: center;
+        padding: 80px 32px;
+    }
+    .page-landing .hero-text {
+        flex: 1;
+    }
+    .page-landing .hero h1 {
+        font-size: 56px;
+    }
+    .page-landing .preview {
+        flex: 1;
+    }
+    .page-landing .steps-grid, .page-landing .modes-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .page-landing .footer {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 24px 32px;
+        text-align: left;
+    }
+}
+/* =========================================================
+   LARGE DESKTOP: 1024px and wider
+   ========================================================= */
+@media (min-width: 1024px) {
+    .page-landing .features-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .page-landing .hero h1 {
+        font-size: 64px;
+    }
+}
+
+/* #########################################################
+   REGISTRATION PAGE (register.html)
+   Every rule starts with .page-register, so it only affects that page.
+   ######################################################### */
+
+/* =========================================================
+   ELEVO – Registration page (register.html)
+   Mobile first. CSS animations used here:
+   1. slide-up      the form card enters when the page loads
+   2. floating labels move up when a field is used
+   3. shake         an invalid field shakes
+   4. pop           the ✓ / ! icon pops in
+   5. strength bar  grows and changes colour
+   6. spin          loading spinner on the button
+   7. draw          the success tick draws itself
+   ========================================================= */
+/* ---------- Top bar (Flexbox) ---------- */
+.page-register .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
+}
+.page-register .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+.page-register .brand-name {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+}
+/* ---------- Page layout (Flexbox: stacked on phones) ---------- */
+.page-register .register-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 28px 16px 48px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+.page-register .intro {
+    width: 100%;
+    max-width: 560px;
+}
+.page-register .intro h1 {
+    font-size: 28px;
+    line-height: 1.2;
+    margin: 0 0 8px;
+}
+.page-register .intro p {
+    margin: 0;
+    color: var(--muted);
+}
+/* Benefits list only shows on desktop */
+.page-register .intro-list {
+    display: none;
+}
+/* ---------- Form card ---------- */
+.page-register .form-card, .page-register .success-card {
+    width: 100%;
+    max-width: 560px;
+    padding: 24px 20px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    animation: slide-up 0.6s ease-out both;
+}
+@keyframes slide-up {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+.page-register .form-card h2 {
+    margin: 0;
+    font-size: 22px;
+}
+.page-register .form-lead {
+    margin: 4px 0 20px;
+    color: var(--muted);
+    font-size: 14px;
+}
+/* Fields are a Grid: 1 column on phones */
+.page-register .form-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+}
+/* ---------- Floating-label fields ---------- */
+.page-register .field {
+    position: relative;
+}
+.page-register .field input, .page-register .field select {
+    width: 100%;
+    height: 56px;
+    padding: 22px 44px 6px 14px;
+    border: 2px solid var(--line);
+    border-radius: 12px;
+    background: var(--bg);
+    color: var(--ink);
+    font: inherit;
+    font-size: 15px;
+    transition: border-color 0.25s, background-color 0.25s;
+    appearance: none;
+}
+.page-register .field input:focus, .page-register .field select:focus {
+    outline: none;
+    border-color: var(--brand);
+    background: var(--surface);
+}
+.page-register .field label {
+    position: absolute;
+    left: 16px;
+    top: 17px;
+    right: 48px;
+    color: var(--muted);
+    font-size: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    pointer-events: none;
+    transition: top 0.2s, font-size 0.2s, color 0.2s;
+}
+/* Label floats up when the field is focused or has text */
+.page-register .field input:focus + label, .page-register .field input:not(:placeholder-shown) + label, .page-register .field select:focus + label, .page-register .field select:valid + label {
+    top: 6px;
+    font-size: 12px;
+    color: var(--brand);
+}
+/* Dropdown arrow for the select */
+.page-register .select-field::after {
+    content: "";
+    position: absolute;
+    right: 18px;
+    top: 24px;
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid var(--muted);
+    border-bottom: 2px solid var(--muted);
+    transform: rotate(45deg);
+    pointer-events: none;
+}
+.page-register .select-field .field-icon {
+    right: 40px;
+}
+/* ---------- Valid / invalid states ---------- */
+.page-register .field.valid input, .page-register .field.valid select {
+    border-color: var(--success);
+}
+.page-register .field.invalid input, .page-register .field.invalid select {
+    border-color: var(--danger);
+}
+.page-register .field.valid input + label, .page-register .field.valid select + label { color: var(--success); }
+.page-register .field.invalid input + label, .page-register .field.invalid select + label { color: var(--danger); }
+.page-register .field-icon {
+    position: absolute;
+    right: 14px;
+    top: 16px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: none;
+    place-items: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+}
+.page-register .field.valid .field-icon, .page-register .field.invalid .field-icon {
+    display: grid;
+    animation: pop 0.3s ease-out;
+}
+.page-register .field.valid .field-icon { background: var(--success); }
+.page-register .field.valid .field-icon::before { content: "✓"; }
+.page-register .field.invalid .field-icon { background: var(--danger); }
+.page-register .field.invalid .field-icon::before { content: "!"; }
+@keyframes pop {
+    0%   { transform: scale(0); }
+    70%  { transform: scale(1.25); }
+    100% { transform: scale(1); }
+}
+/* Shake animation, added by JavaScript */
+.page-register .shake {
+    animation: shake 0.4s ease-in-out;
+}
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-8px); }
+    40%, 80% { transform: translateX(8px); }
+}
+/* Error message slides open */
+.page-register .error {
+    display: block;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    color: var(--danger);
+    font-size: 13px;
+    padding-left: 4px;
+    transition: max-height 0.25s, opacity 0.25s, margin 0.25s;
+}
+.page-register .field.invalid .error, .page-register .check-field.invalid .error {
+    max-height: 60px;
+    opacity: 1;
+    margin-top: 6px;
+}
+/* ---------- Password extras ---------- */
+.page-register .show-btn {
+    position: absolute;
+    right: 8px;
+    top: 10px;
+    height: 36px;
+    padding: 0 10px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--brand);
+    font: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.page-register .show-btn:hover {
+    background: var(--soft);
+}
+.page-register .field[data-field="password"] input {
+    padding-right: 70px;
+}
+.page-register .strength {
+    height: 6px;
+    margin-top: 10px;
+    border-radius: 999px;
+    background: var(--soft);
+    overflow: hidden;
+}
+.page-register .strength-bar {
+    width: 0;
+    height: 100%;
+    border-radius: 999px;
+    background: var(--danger);
+    transition: width 0.4s ease, background-color 0.4s ease;
+}
+.page-register .strength-text {
+    margin: 6px 0 0;
+    font-size: 12px;
+    color: var(--muted);
+}
+.page-register .rules {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4px;
+    font-size: 13px;
+    color: var(--muted);
+}
+.page-register .rules li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.25s;
+}
+.page-register .rules li::before {
+    content: "";
+    width: 16px;
+    height: 16px;
+    flex: none;
+    border-radius: 50%;
+    border: 2px solid var(--line);
+    transition: background-color 0.25s, border-color 0.25s, transform 0.25s;
+}
+.page-register .rules li.met {
+    color: var(--success);
+}
+.page-register .rules li.met::before {
+    background: var(--success);
+    border-color: var(--success);
+    transform: scale(1.1);
+}
+/* ---------- Custom checkbox ---------- */
+.page-register .check {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    cursor: pointer;
+}
+.page-register .check input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+}
+.page-register .check .box {
+    width: 22px;
+    height: 22px;
+    flex: none;
+    border: 2px solid var(--line);
+    border-radius: 6px;
+    display: grid;
+    place-items: center;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+.page-register .check input:checked + .box {
+    background: var(--brand);
+    border-color: var(--brand);
+}
+.page-register .check input:checked + .box::after {
+    content: "✓";
+    color: var(--brand-ink);
+    font-size: 14px;
+    font-weight: 700;
+    animation: pop 0.25s ease-out;
+}
+.page-register .check input:focus-visible + .box {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+}
+.page-register .check-field.invalid .box {
+    border-color: var(--danger);
+}
+/* ---------- Submit button + spinner ---------- */
+.page-register .submit-btn {
+    width: 100%;
+    margin-top: 20px;
+    height: 50px;
+    position: relative;
+}
+.page-register .spinner {
+    display: none;
+    width: 20px;
+    height: 20px;
+    border: 3px solid currentColor;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+}
+.page-register .submit-btn.loading .btn-label { display: none; }
+.page-register .submit-btn.loading .spinner { display: block; }
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+.page-register .form-progress {
+    text-align: center;
+    font-size: 13px;
+    color: var(--muted);
+    margin: 10px 0 0;
+}
+.page-register .switch-link {
+    text-align: center;
+    font-size: 14px;
+    color: var(--muted);
+    margin: 16px 0 0;
+}
+.page-register .switch-link a {
+    color: var(--brand);
+    font-weight: 600;
+}
+/* ---------- Success card ---------- */
+.page-register .success-card {
+    text-align: center;
+    padding: 40px 24px;
+    animation: pop-in 0.5s ease-out both;
+}
+@keyframes pop-in {
+    0%   { opacity: 0; transform: scale(0.85); }
+    100% { opacity: 1; transform: scale(1); }
+}
+.page-register .success-card h2 {
+    margin: 16px 0 6px;
+    font-size: 26px;
+}
+.page-register .success-card p {
+    margin: 0 0 24px;
+    color: var(--muted);
+}
+.page-register .check-circle {
+    stroke: var(--success);
+    stroke-width: 3;
+    stroke-dasharray: 151;
+    stroke-dashoffset: 151;
+    animation: draw 0.6s ease-out forwards;
+}
+.page-register .check-mark {
+    stroke: var(--success);
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 36;
+    stroke-dashoffset: 36;
+    animation: draw 0.4s 0.5s ease-out forwards;
+}
+@keyframes draw {
+    to { stroke-dashoffset: 0; }
+}
+/* =========================================================
+   TABLET: 600px and wider – two columns of fields
+   ========================================================= */
+@media (min-width: 600px) {
+    .page-register .form-card {
+        padding: 32px;
+    }
+    .page-register .form-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    .page-register .form-grid .full {
+        grid-column: 1 / -1;
+    }
+    .page-register .rules {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+/* =========================================================
+   DESKTOP: 900px and wider – intro beside the form
+   ========================================================= */
+@media (min-width: 900px) {
+    .page-register .topbar {
+        padding: 14px 32px;
+    }
+    .page-register .register-page {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 56px;
+        padding: 64px 32px;
+    }
+    .page-register .intro {
+        flex: 1;
+        max-width: 380px;
+        position: sticky;
+        top: 64px;
+    }
+    .page-register .intro h1 {
+        font-size: 40px;
+    }
+    .page-register .intro-list {
+        display: block;
+        list-style: none;
+        padding: 0;
+        margin: 28px 0 0;
+    }
+    .page-register .intro-list li {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 0;
+        border-bottom: 1px solid var(--line);
+    }
+    .page-register .intro-list li::before {
+        content: "✓";
+        width: 26px;
+        height: 26px;
+        flex: none;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: var(--soft);
+        color: var(--brand);
+        font-weight: 700;
+        font-size: 13px;
+    }
+    .page-register .form-card, .page-register .success-card {
+        flex: 1;
+    }
+}
+
+/* #########################################################
+   CHAT PAGE (chat.html)
+   Every rule starts with .page-chat, so it only affects that page.
+   ######################################################### */
+
+/* =========================================================
+   ELEVO – Chat page (chat.html)
+   Mobile first: phone styles first, then media queries for
+   bigger screens at the end. Uses Flexbox for the layout,
+   chat bubbles, header and input; CSS animations for the
+   typing dots, welcome logo and settings panel.
+   ========================================================= */
+.page-chat {
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+html, body.page-chat { height: 100%; }
+html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+body.page-chat { line-height: normal; }
+.page-chat .layout { display: flex; height: 100%; }
+.page-chat .app {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+}
+/* Header */
+.page-chat header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 12px;
+  border-bottom: 1px solid var(--line);
+}
+.page-chat .brand { display: flex; align-items: center; gap: 10px; }
+.page-chat .logo {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: var(--brand); color: var(--brand-ink);
+  display: grid; place-items: center;
+}
+.page-chat .brand h1 { margin: 0; letter-spacing: .14em; font-weight: 700; }
+.page-chat .brand p { margin: 0; font-size: 12px; color: var(--muted); }
+.page-chat .actions { display: flex; gap: 6px; }
+.page-chat header .icon-btn { width: 34px; height: 34px; }
+.page-chat .brand { min-width: 0; }
+.page-chat .brand h1 { font-size: 18px; }
+.page-chat .icon-btn {
+  width: 38px; height: 38px; border-radius: 10px;
+  border: 1px solid var(--line); background: transparent; color: var(--ink);
+  display: grid; place-items: center; cursor: pointer; font: inherit;
+}
+.page-chat .icon-btn:hover { background: var(--bot); }
+.page-chat button:focus-visible, .page-chat textarea:focus-visible, .page-chat .chip:focus-visible {
+  outline: 2px solid var(--brand); outline-offset: 2px;
+}
+/* Messages */
+.page-chat #messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px max(18px, calc((100% - 820px) / 2));
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.page-chat .row { display: flex; gap: 10px; max-width: 100%; }
+.page-chat .row.user { justify-content: flex-end; }
+.page-chat .avatar {
+  flex: none; width: 30px; height: 30px; border-radius: 8px;
+  background: var(--brand); color: var(--brand-ink);
+  display: grid; place-items: center; margin-top: 2px;
+}
+.page-chat .bubble {
+  max-width: 88%;
+  padding: 11px 15px;
+  border-radius: 16px;
+  line-height: 1.6;
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+.page-chat .user .bubble { background: var(--brand); color: var(--brand-ink); border-bottom-right-radius: 5px; white-space: pre-wrap; }
+.page-chat .bot .bubble { background: var(--bot); border-bottom-left-radius: 5px; }
+.page-chat .bot .bubble p { margin: 0 0 8px; }
+.page-chat .bot .bubble p:last-child, .page-chat .bot .bubble ul:last-child, .page-chat .bot .bubble ol:last-child { margin-bottom: 0; }
+.page-chat .bot .bubble ul, .page-chat .bot .bubble ol { margin: 0 0 8px; padding-left: 20px; }
+.page-chat .bot .bubble code {
+  font-family: Consolas, "Courier New", monospace; font-size: 13px;
+  background: var(--surface); padding: 1px 5px; border-radius: 5px;
+}
+.page-chat .bot .bubble pre {
+  background: var(--surface); padding: 10px 12px; border-radius: 10px;
+  overflow-x: auto; margin: 0 0 8px;
+}
+.page-chat .bot .bubble pre code { padding: 0; background: none; }
+.page-chat .bubble.error { color: var(--danger); }
+.page-chat .dots { display: inline-flex; gap: 5px; padding: 4px 0; }
+.page-chat .dots span {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--muted);
+  animation: bounce 1.2s infinite ease-in-out;
+}
+.page-chat .dots span:nth-child(2) { animation-delay: .15s; }
+.page-chat .dots span:nth-child(3) { animation-delay: .3s; }
+@keyframes bounce { 0%, 80%, 100% { transform: translateY(0); opacity: .4; } 40% { transform: translateY(-5px); opacity: 1; } }
+/* Welcome */
+.page-chat .welcome { margin: auto 0; text-align: center; padding: 20px 6px; }
+.page-chat .welcome .big-logo {
+  width: 64px; height: 64px; border-radius: 18px; margin: 0 auto 16px;
+  background: var(--brand); color: var(--brand-ink);
+  display: grid; place-items: center;
+  animation: rise 0.7s ease-out both;
+}
+@keyframes rise { from { transform: translateY(14px); opacity: 0; } to { transform: none; opacity: 1; } }
+.page-chat .welcome h2 { font-size: 26px; margin: 0 0 6px; }
+.page-chat .welcome > p { color: var(--muted); margin: 0 0 22px; }
+.page-chat .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.page-chat .chip {
+  border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+  padding: 9px 14px; border-radius: 999px; cursor: pointer; font: inherit; font-size: 14px;
+}
+.page-chat .chip:hover { border-color: var(--brand); }
+/* Composer */
+.page-chat .composer {
+  border-top: 1px solid var(--line);
+  padding: 12px max(14px, calc((100% - 820px) / 2));
+}
+.page-chat .input-wrap {
+  display: flex; align-items: flex-end; gap: 8px;
+  border: 1px solid var(--line); border-radius: 16px;
+  padding: 6px 6px 6px 14px; background: var(--bg);
+}
+.page-chat .input-wrap:focus-within { border-color: var(--brand); }
+.page-chat textarea {
+  flex: 1; border: none; outline: none; resize: none; background: transparent;
+  color: var(--ink); font: inherit; font-size: 15px; line-height: 1.5;
+  max-height: 160px; padding: 7px 0;
+}
+.page-chat textarea:focus-visible { outline: none; }
+.page-chat #sendBtn {
+  flex: none; width: 40px; height: 40px; border-radius: 12px; border: none;
+  background: var(--brand); color: var(--brand-ink); cursor: pointer;
+  display: grid; place-items: center;
+}
+.page-chat #sendBtn:disabled { opacity: .45; cursor: not-allowed; }
+.page-chat .hint { font-size: 12px; color: var(--muted); text-align: center; margin: 8px 0 0; }
+@media (min-width: 600px) {
+    .page-chat .bubble { max-width: min(78%, 600px); }
+    .page-chat header { gap: 12px; padding: 14px 18px; }
+    .page-chat .actions { gap: 8px; }
+    .page-chat header .icon-btn { width: 38px; height: 38px; }
+    .page-chat .brand h1 { font-size: 20px; }
+}
+/* ---------- Status pill ---------- */
+.page-chat .status {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; color: var(--muted); margin: 0;
+}
+.page-chat .status::before {
+  content: ""; width: 8px; height: 8px; border-radius: 50%;
+  background: #f59e0b;
+}
+.page-chat .status.ai::before { background: #22c55e; }
+/* ---------- Settings panel ---------- */
+.page-chat .overlay {
+  position: fixed; inset: 0; background: rgba(10, 12, 30, .55);
+  display: none; align-items: center; justify-content: center;
+  padding: 16px; z-index: 10;
+}
+.page-chat .overlay.open { display: flex; }
+.page-chat .panel {
+  width: 100%; max-width: 440px; max-height: 100%; overflow-y: auto;
+  background: var(--surface); color: var(--ink);
+  border: 1px solid var(--line); border-radius: 16px; padding: 22px;
+  animation: rise .25s ease-out both;
+}
+.page-chat .panel h2 { margin: 0 0 4px; font-size: 20px; }
+.page-chat .panel > p { margin: 0 0 18px; color: var(--muted); font-size: 14px; line-height: 1.5; }
+.page-chat .panel label { display: block; font-size: 14px; font-weight: 600; margin: 14px 0 6px; }
+.page-chat .panel select, .page-chat .panel input {
+  width: 100%; padding: 10px 12px; border-radius: 10px;
+  border: 1px solid var(--line); background: var(--bg); color: var(--ink);
+  font: inherit; font-size: 14px;
+}
+.page-chat .panel select:focus-visible, .page-chat .panel input:focus-visible { outline: 2px solid var(--brand); outline-offset: 1px; }
+.page-chat .panel small { display: block; color: var(--muted); font-size: 12px; margin-top: 6px; line-height: 1.5; }
+.page-chat .panel small a { color: var(--brand); }
+.page-chat .panel-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 22px; }
+.page-chat .panel .btn {
+  padding: 10px 18px; border-radius: 10px; font: inherit; font-size: 14px;
+  cursor: pointer; border: 1px solid var(--line); background: transparent; color: var(--ink);
+}
+.page-chat .panel .btn.primary { background: var(--brand); color: var(--brand-ink); border-color: var(--brand); font-weight: 600; }
+/* ---------- Chat history sidebar ---------- */
+.page-chat .brand { margin-right: auto; }
+/* Phones: the chat list is a drawer that slides in from the left */
+.page-chat .sidebar {
+  position: fixed; top: 0; bottom: 0; left: 0; z-index: 20;
+  width: min(300px, 85vw);
+  transform: translateX(-100%);
+  transition: transform .25s ease;
+  display: flex; flex-direction: column; gap: 10px;
+  padding: calc(14px + env(safe-area-inset-top, 0px)) 12px calc(14px + env(safe-area-inset-bottom, 0px));
+  background: var(--bg);
+  border-right: 1px solid var(--line);
+}
+.page-chat .sidebar-top { display: flex; gap: 8px; }
+.page-chat .new-chat {
+  flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 10px 14px; border-radius: 10px; border: none; cursor: pointer;
+  background: var(--brand); color: var(--brand-ink); font: inherit; font-size: 14px; font-weight: 600;
+}
+.page-chat .search-chats {
+  width: 100%; padding: 9px 12px; border-radius: 10px;
+  border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+  font: inherit; font-size: 14px;
+}
+.page-chat .search-chats:focus-visible { outline: 2px solid var(--brand); outline-offset: 1px; }
+.page-chat .chat-list { flex: 1; overflow-y: auto; margin: 0 -4px; padding: 0 4px; }
+.page-chat .chat-group { font-size: 12px; color: var(--muted); margin: 14px 8px 6px; font-weight: 600; }
+.page-chat .chat-group:first-child { margin-top: 4px; }
+.page-chat .chat-empty { font-size: 13px; color: var(--muted); margin: 10px 8px; }
+.page-chat .chat-item {
+  display: flex; align-items: center; gap: 2px;
+  border-radius: 9px; padding-right: 4px;
+}
+.page-chat .chat-item:hover, .page-chat .chat-item.active { background: var(--bot); }
+.page-chat .chat-open {
+  flex: 1; min-width: 0; text-align: left; cursor: pointer;
+  background: none; border: none; color: var(--ink); font: inherit; font-size: 14px;
+  padding: 9px 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.page-chat .chat-item.active .chat-open { font-weight: 600; }
+.page-chat .chat-action {
+  flex: none; display: grid; place-items: center; min-width: 28px; height: 28px;
+  border: none; background: none; color: var(--muted); border-radius: 7px; cursor: pointer;
+  opacity: 0; font: inherit; font-size: 12px;
+}
+.page-chat .chat-item:hover .chat-action, .page-chat .chat-item.active .chat-action, .page-chat .chat-action:focus-visible { opacity: 1; }
+.page-chat .chat-action:hover { color: var(--ink); background: var(--surface); }
+.page-chat .chat-action.armed { opacity: 1; color: #fff; background: var(--danger); padding: 0 8px; font-weight: 600; }
+.page-chat .chat-rename {
+  flex: 1; min-width: 0; padding: 8px; border-radius: 8px;
+  border: 1px solid var(--brand); background: var(--surface); color: var(--ink); font: inherit; font-size: 14px;
+}
+.page-chat .sidebar-note { font-size: 11px; color: var(--muted); margin: 0 8px; }
+.page-chat .backdrop { display: none; }
+@media (hover: none) {
+    .page-chat .chat-action { opacity: 1; }
+}
+.page-chat .sidebar.open { transform: translateX(0); }
+.page-chat .backdrop.open {
+  display: block;
+  position: fixed; inset: 0; z-index: 15; background: rgba(10, 12, 30, .5);
+}
+/* =========================================================
+   DESKTOP: 900px and wider – the chat list is always visible
+   ========================================================= */
+@media (min-width: 900px) {
+    .page-chat .menu-btn, .page-chat .close-sidebar { display: none; }
+    .page-chat .sidebar {
+    position: static;
+    width: 272px;
+    flex: none;
+    height: 100%;
+    transform: none;
+    transition: none;
+    padding: 14px 12px;
+  }
+    .page-chat .backdrop.open { display: none; }
+}
+/* ---------- Signed-in user box ---------- */
+.page-chat .user-box {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 8px; border-top: 1px solid var(--line);
+}
+.page-chat .user-avatar {
+  width: 34px; height: 34px; flex: none; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--brand); color: var(--brand-ink); font-weight: 700;
+}
+.page-chat .user-info { display: flex; flex-direction: column; min-width: 0; font-size: 14px; line-height: 1.3; }
+.page-chat .user-info strong { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.page-chat .user-info small { color: var(--muted); font-size: 12px; }
+.page-chat .user-info a { color: var(--brand); font-weight: 600; }
+.page-chat .logo { text-decoration: none; }
+/* ---------- Image mode button ---------- */
+.page-chat .img-toggle {
+  flex: none; align-self: flex-end;
+  display: flex; align-items: center; gap: 6px;
+  height: 40px; padding: 0 10px; margin-left: -8px;
+  border: 1px solid transparent; border-radius: 12px;
+  background: transparent; color: var(--muted);
+  font: inherit; font-size: 13px; font-weight: 600; cursor: pointer;
+  transition: background-color .2s, color .2s, border-color .2s;
+}
+.page-chat .img-toggle:hover { color: var(--ink); background: var(--surface); }
+.page-chat .img-toggle.active { color: var(--brand); background: var(--surface); border-color: var(--brand); }
+.page-chat .img-toggle-label { display: none; }
+/* ---------- Image replies ---------- */
+.page-chat .bubble.image-bubble { padding: 8px; width: min(88%, 420px); }
+.page-chat .image-bubble figure { margin: 0; }
+.page-chat .image-bubble img {
+  display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover;
+  border-radius: 12px; background: var(--surface);
+  animation: image-in .5s ease-out;
+}
+@keyframes image-in { from { opacity: 0; transform: scale(.97); } to { opacity: 1; transform: none; } }
+.page-chat .image-bubble figcaption {
+  display: flex; flex-direction: column; gap: 8px;
+  padding: 10px 6px 4px; font-size: 13px; color: var(--muted);
+}
+.page-chat .image-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.page-chat .image-actions button {
+  padding: 6px 12px; border-radius: 8px; border: 1px solid var(--line);
+  background: var(--surface); color: var(--ink); font: inherit; font-size: 13px; font-weight: 600; cursor: pointer;
+}
+.page-chat .image-actions button:hover { border-color: var(--brand); }
+.page-chat .image-missing { margin: 8px; font-size: 14px; color: var(--muted); }
+/* Loading placeholder with a moving shine */
+.page-chat .image-loading { display: flex; flex-direction: column; gap: 10px; width: min(70vw, 320px); }
+.page-chat .image-loading span { font-size: 13px; color: var(--muted); }
+.page-chat .image-skeleton {
+  aspect-ratio: 1 / 1; border-radius: 12px;
+  background: linear-gradient(100deg, var(--surface) 30%, var(--line) 50%, var(--surface) 70%);
+  background-size: 200% 100%;
+  animation: shine 1.4s linear infinite;
+}
+@keyframes shine { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+@media (min-width: 600px) {
+    .page-chat .img-toggle-label { display: inline; }
+}

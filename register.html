@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create your ELEVO account</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        // Apply the saved theme before the page appears (no white flash)
+        try {
+            document.documentElement.setAttribute("data-theme",
+                localStorage.getItem("elevo-theme") ||
+                (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
+        } catch (e) {}
+    </script>
+</head>
+<body class="page-register">
+
+    <!-- Top bar (Flexbox) -->
+    <header class="topbar">
+        <a href="index.html" class="brand" aria-label="ELEVO home">
+            <span class="logo" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 14l7-7 7 7"/><path d="M5 20l7-7 7 7" opacity=".55"/></svg>
+            </span>
+            <span class="brand-name">ELEVO</span>
+        </a>
+        <button class="icon-btn theme-toggle" aria-label="Switch dark or light mode" title="Switch theme">
+            <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+            <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        </button>
+    </header>
+
+    <main class="register-page">
+
+        <!-- Left panel: why sign up (shown beside the form on desktop) -->
+        <aside class="intro">
+            <h1>Create your ELEVO account</h1>
+            <p>Sign up in under a minute. ELEVO will greet you by name and save your chats on this device.</p>
+            <ul class="intro-list">
+                <li>Works offline from the first message</li>
+                <li>Add a free AI key any time</li>
+                <li>Your password is never stored</li>
+            </ul>
+        </aside>
+
+        <!-- Registration card -->
+        <section class="form-card" id="formCard" aria-labelledby="formTitle">
+            <h2 id="formTitle">Sign up</h2>
+            <p class="form-lead">All fields are required. Errors show as you type.</p>
+
+            <form id="registerForm" novalidate>
+                <div class="form-grid">
+
+                    <!-- Full name -->
+                    <div class="field" data-field="name">
+                        <input type="text" id="name" name="name" placeholder=" " autocomplete="name" aria-describedby="nameError">
+                        <label for="name">Full name</label>
+                        <span class="field-icon" aria-hidden="true"></span>
+                        <small class="error" id="nameError"></small>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="field" data-field="email">
+                        <input type="email" id="email" name="email" placeholder=" " autocomplete="email" aria-describedby="emailError">
+                        <label for="email">Email address</label>
+                        <span class="field-icon" aria-hidden="true"></span>
+                        <small class="error" id="emailError"></small>
+                    </div>
+
+                    <!-- Phone -->
+                    <div class="field" data-field="phone">
+                        <input type="tel" id="phone" name="phone" placeholder=" " autocomplete="tel" inputmode="numeric" maxlength="10" aria-describedby="phoneError">
+                        <label for="phone">Phone number</label>
+                        <span class="field-icon" aria-hidden="true"></span>
+                        <small class="error" id="phoneError"></small>
+                    </div>
+
+                    <!-- Role -->
+                    <div class="field select-field" data-field="role">
+                        <select id="role" name="role" required aria-describedby="roleError">
+                            <option value="" selected disabled hidden></option>
+                            <option value="Student">Student</option>
+                            <option value="Teacher">Teacher</option>
+                            <option value="Developer">Developer</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <label for="role">I am a...</label>
+                        <span class="field-icon" aria-hidden="true"></span>
+                        <small class="error" id="roleError"></small>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="field full" data-field="password">
+                        <input type="password" id="password" name="password" placeholder=" " autocomplete="new-password" aria-describedby="passwordError passwordRules">
+                        <label for="password">Password</label>
+                        <button type="button" class="show-btn" id="togglePassword" aria-label="Show password">Show</button>
+                        <small class="error" id="passwordError"></small>
+
+                        <div class="strength" aria-hidden="true">
+                            <div class="strength-bar" id="strengthBar"></div>
+                        </div>
+                        <p class="strength-text" id="strengthText">Password strength</p>
+
+                        <ul class="rules" id="passwordRules">
+                            <li data-rule="length">At least 8 characters</li>
+                            <li data-rule="upper">One capital letter</li>
+                            <li data-rule="number">One number</li>
+                            <li data-rule="symbol">One symbol (like @ # !)</li>
+                        </ul>
+                    </div>
+
+                    <!-- Confirm password -->
+                    <div class="field full" data-field="confirm">
+                        <input type="password" id="confirm" name="confirm" placeholder=" " autocomplete="new-password" aria-describedby="confirmError">
+                        <label for="confirm">Confirm password</label>
+                        <span class="field-icon" aria-hidden="true"></span>
+                        <small class="error" id="confirmError"></small>
+                    </div>
+
+                    <!-- Terms -->
+                    <div class="check-field full" data-field="terms">
+                        <label class="check">
+                            <input type="checkbox" id="terms" name="terms" aria-describedby="termsError">
+                            <span class="box" aria-hidden="true"></span>
+                            I agree to use ELEVO responsibly
+                        </label>
+                        <small class="error" id="termsError"></small>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn primary submit-btn" id="submitBtn">
+                    <span class="btn-label">Create account</span>
+                    <span class="spinner" aria-hidden="true"></span>
+                </button>
+
+                <p class="form-progress" id="formProgress" aria-live="polite">0 of 7 fields complete</p>
+            </form>
+
+            <p class="switch-link">Just want to look around? <a href="chat.html">Try ELEVO as a guest</a></p>
+        </section>
+
+        <!-- Success message (shown after a valid sign-up) -->
+        <section class="success-card hidden" id="successCard" aria-live="polite">
+            <svg class="success-check" width="84" height="84" viewBox="0 0 52 52" aria-hidden="true">
+                <circle class="check-circle" cx="26" cy="26" r="24" fill="none"/>
+                <path class="check-mark" fill="none" d="M15 27l7 7 15-15"/>
+            </svg>
+            <h2 id="successTitle">Welcome to ELEVO!</h2>
+            <p id="successText">Your account is ready.</p>
+            <a href="chat.html" class="btn primary">Start chatting</a>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
