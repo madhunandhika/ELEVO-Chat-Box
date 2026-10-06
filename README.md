@@ -1,136 +1,455 @@
-# ELEVO – AI Chatbot
+ELEVO — AI Chatbot
 
-## Introduction
-ELEVO is a web-based AI chatbot that answers study, coding and everyday questions. It works **offline** using a built-in knowledge base, and gives **real AI answers** when a free Google Gemini key is added. The project has three pages: a product landing page, a registration form with real-time validation, and the chat app with saved chat history.
+«ELEVO is a lightweight, responsive web-based AI chatbot designed to answer study, coding, mathematics, and everyday questions. It supports offline responses through a built-in knowledge base and can provide real AI-powered answers when an AI API is configured.»
 
-It is built with raw HTML, CSS and JavaScript only. No Bootstrap, Tailwind or any other UI framework is used.
+Live Demo: "https://madhunandhika.github.io/ELEVO-Chat-Box/"
 
-**Live demo:** `https://YOUR-USERNAME.github.io/elevo-chatbot/` (replace with your GitHub Pages link)
+Repository: "https://github.com/madhunandhika/ELEVO-Chat-Box"
 
-**Full documentation:** see [DOCUMENTATION.md](DOCUMENTATION.md) for how every part works, test results and the requirements checklist.
+---
 
-## Screenshots
+🚀 About ELEVO
 
-### 1. Product landing page (Flexbox + Grid + dark/light mode)
-| Light mode | Dark mode | Mobile |
-| --- | --- | --- |
-| ![Landing page light](screenshots/landing-light.png) | ![Landing page dark](screenshots/landing-dark.png) | ![Landing page mobile](screenshots/landing-mobile.png) |
+ELEVO is a web-based chatbot built to provide users with quick and interactive answers across different types of questions.
 
-### 2. Registration form (CSS animations + real-time validation)
-| Errors on submit | Checking while typing | Success |
-| --- | --- | --- |
-| ![Form errors](screenshots/register-errors.png) | ![Real-time validation](screenshots/register-typing.png) | ![Registration success](screenshots/register-success.png) |
+The chatbot can work in offline mode using its built-in knowledge base. For more advanced questions, users can connect an AI service such as Google Gemini to receive real AI-generated responses.
 
-### 3. Chat app
-| Desktop | Dark mode | Mobile |
-| --- | --- | --- |
-| ![Chat desktop](screenshots/chat-desktop.png) | ![Chat dark](screenshots/chat-dark.png) | ![Chat mobile](screenshots/chat-mobile.png) |
+ELEVO combines a simple user interface with useful chatbot features such as:
 
-## Features
+- 🤖 AI-powered conversations
+- 📚 Offline knowledge base
+- 🧮 Mathematics and calculations
+- 💻 Programming-related questions
+- 🔄 Unit conversions
+- 🖼️ Image generation
+- 💬 Chat history
+- 🌙 Dark/light mode
+- 📱 Responsive design
+- ✅ Interactive registration and validation
 
-**Product landing page (`index.html`)**
-- Navbar, hero section, buttons and footer built with **CSS Flexbox**
-- Features, "How it works" and "Modes" sections built with **CSS Grid**
-- **Dark/light mode toggle** using CSS variables and JavaScript, remembered on every page
-- Mobile-first layout with media queries at 600px, 768px and 1024px
-- Hover transitions on cards and buttons
+---
 
-**Registration form (`register.html`)**
-- **Real-time client-side validation** on every keystroke (`input` event)
-- Checks name, email, 10-digit phone, role, password rules, matching passwords and the terms box
-- Password strength meter and live rule checklist
-- Show/hide password button and a "fields complete" counter
-- **CSS animations:** form slide-up, floating labels, shake on invalid fields, pop-in ✓/! icons, growing strength bar, loading spinner, and a self-drawing success tick
-- The password is never stored
+✨ Features
 
-**Chat app (`chat.html`)**
-- Offline mode with 60+ topics, maths, percentages, unit conversions, time and date
-- AI mode with Google Gemini (free key) or Anthropic Claude, with automatic offline fallback
-- **Image generation:** type "draw a cat astronaut" or turn on the **Image** button to create pictures, with download and "make another" buttons. Uses a free service with no key, or Google Gemini with your key (needs internet)
-- Chat history sidebar: chats grouped by date, with search, rename and delete
-- Greets the registered user by name
-- Typing animation, stop button, new chat button, dark/light mode
+🤖 AI Chatbot
 
-## Technologies Used
-- HTML5 (semantic tags: `header`, `nav`, `main`, `section`, `article`, `aside`, `footer`)
-- CSS3 (Flexbox, Grid, CSS variables, media queries, transitions, `@keyframes` animations)
-- JavaScript (DOM, events, regular expressions, `fetch`, `async/await`, `localStorage`)
-- Node.js + Express (optional server that hides the API key)
+ELEVO is designed as a general-purpose chatbot that can respond to different categories of questions.
 
-## Project Structure
-```
-elevo-chatbot/
+Offline Mode
+
+The built-in knowledge base allows ELEVO to answer questions without requiring an AI API.
+
+It includes support for:
+
+- Study-related topics
+- Programming concepts
+- Mathematics
+- Percentages
+- Unit conversions
+- Time and date
+- Everyday questions
+- 60+ predefined topics
+
+AI Mode
+
+For questions outside the offline knowledge base, ELEVO can connect to AI services such as:
+
+- Google Gemini
+- Anthropic Claude
+
+The chatbot can automatically fall back to its offline knowledge base when an AI service is unavailable.
+
+---
+
+🖼️ Image Generation
+
+ELEVO also supports image generation from natural-language prompts.
+
+For example:
+
+draw a cat astronaut
+
+or:
+
+draw a robot reading a book
+
+Users can:
+
+- Generate images
+- Download generated images
+- Generate another image
+
+---
+
+💬 Chat History
+
+ELEVO provides a chat-history sidebar that allows users to manage their conversations.
+
+Users can:
+
+- Start a new chat
+- Search previous chats
+- Rename conversations
+- Delete conversations
+- View conversations grouped by date
+- Continue previous conversations
+
+The chatbot also greets the registered user by name.
+
+---
+
+🎨 User Interface
+
+ELEVO uses a custom interface built entirely with HTML, CSS and JavaScript.
+
+UI features
+
+- Responsive navigation
+- Hero section
+- Interactive buttons
+- Chat interface
+- Sidebar
+- Cards and sections
+- Hover effects
+- Smooth transitions
+- CSS animations
+- Mobile-friendly layouts
+
+No frontend UI framework is used.
+
+---
+
+🌙 Dark & Light Mode
+
+ELEVO supports both:
+
+- ☀️ Light mode
+- 🌙 Dark mode
+
+The selected theme is saved using "localStorage", allowing the preference to remain consistent across the application pages.
+
+The colors can be customized through CSS variables in "style.css".
+
+---
+
+📝 Registration Form
+
+ELEVO includes an interactive registration page with real-time client-side validation.
+
+Validation includes
+
+- Name
+- Email
+- 10-digit phone number
+- Role
+- Password
+- Confirm password
+- Terms and conditions
+
+Additional features
+
+- Real-time validation
+- Password strength meter
+- Password rule checklist
+- Show/hide password
+- Form completion counter
+- Error messages
+- Success feedback
+- Submission blocking for invalid fields
+
+CSS Animations
+
+The form includes custom animations such as:
+
+- Slide-up animation
+- Floating labels
+- Invalid-field shake
+- Success/error icons
+- Strength-bar animation
+- Loading spinner
+- Success tick animation
+
+«Passwords are not stored by the application.»
+
+---
+
+🛠️ Technology Stack
+
+Technology| Usage
+HTML5| Page structure and semantic elements
+CSS3| Styling, layouts, animations and themes
+JavaScript| Chatbot logic and application interactions
+LocalStorage| Theme and client-side data persistence
+Fetch API| API communication
+Node.js| Optional backend
+Express.js| Optional API server
+Google Gemini| AI-generated chatbot responses
+Anthropic Claude| Alternative AI provider
+
+Frontend
+
+The project is built using vanilla HTML, CSS and JavaScript.
+
+It does not use:
+
+- Bootstrap
+- Tailwind CSS
+- React
+- Angular
+- Vue
+- Other UI frameworks
+
+---
+
+📂 Project Structure
+
+ELEVO-Chat-Box/
+│
 ├── index.html          # Product landing page
-├── register.html       # Registration form
+├── register.html       # Registration page
 ├── chat.html           # ELEVO chatbot
-├── style.css           # All styles: colours, dark mode, landing, form, chat
-├── script.js           # All JavaScript: dark mode, validation, chatbot, images
-├── server.js           # Optional Node.js server (keeps the API key secret)
+│
+├── style.css           # Complete application styling
+├── script.js           # Chatbot and UI functionality
+│
+├── server.js           # Optional Node.js server
 ├── package.json        # Server dependencies
-├── .env.example        # Template for the server API key
-├── .gitignore          # Keeps .env and node_modules off GitHub
-├── .nojekyll           # Tells GitHub Pages to publish files as they are
-├── screenshots/        # Screenshots used in the README
+├── .env.example        # Environment variable template
+├── .gitignore          # Ignored files
+├── .nojekyll           # GitHub Pages configuration
+│
 ├── README.md           # Project overview
-└── DOCUMENTATION.md    # Full project documentation
-```
+└── DOCUMENTATION.md    # Detailed documentation
 
-### How the files work together
-- Every page links the same `style.css` and `script.js`.
-- Each page's `<body>` has a class (`page-landing`, `page-register`, `page-chat`), and the CSS for that page starts with that class, so styles never mix between pages.
-- `script.js` is split into 5 parts. Each part checks which page it is on and only runs where it's needed.
+---
 
-## Installation
-1. Download or clone this repository.
-2. Open the project folder.
-3. Open `index.html` in Chrome or Edge.
+🏗️ How ELEVO Works
 
-No installation is needed for the website. The server is optional:
-1. Install Node.js 18 or newer.
-2. Run `npm install`.
-3. Copy `.env.example` to `.env` and add your API key.
-4. Run `npm start` and open http://localhost:3000
+                    ┌───────────────────┐
+                    │    ELEVO UI       │
+                    └─────────┬─────────┘
+                              │
+                     User enters a query
+                              │
+                    ┌─────────▼─────────┐
+                    │   Chatbot Logic   │
+                    └─────────┬─────────┘
+                              │
+                ┌─────────────┴─────────────┐
+                │                           │
+         Offline Knowledge             AI Service
+                │                           │
+        ┌───────▼───────┐          ┌────────▼────────┐
+        │ Local Answers │          │ Gemini / Claude │
+        └───────┬───────┘          └────────┬────────┘
+                │                           │
+                └─────────────┬─────────────┘
+                              │
+                       Chatbot Response
 
-## Usage
-1. Open the landing page and click **Create free account**.
-2. Fill in the registration form. Fix any red fields, then click **Create account**.
-3. Click **Start chatting**. ELEVO greets you by name.
-4. Ask a question, for example "flexbox vs grid", "15% of 2000" or "10 km to miles".
-5. For answers on any topic, click the gear icon, choose **Google Gemini**, and paste a free key from https://aistudio.google.com/apikey
-6. To create a picture, type something like "draw a robot reading a book", or click the **Image** button and describe what you want.
-7. Use the sidebar to open, search, rename or delete old chats.
-8. Use the moon/sun button on any page to switch between dark and light mode.
+This hybrid approach allows ELEVO to remain useful even when an external AI service is unavailable.
 
-## Changing Dark Mode
-- **Switch theme:** click the moon/sun button at the top right of any page. The choice is saved and used on every page.
-- **Change the dark colours:** open `style.css` and edit the values under `:root[data-theme="dark"]` near the top. For example, change `--bg` for the page background or `--brand` for the button colour.
-- **Change the light colours:** edit the values under `:root` just above it.
-- **How it works:** Part 1 of `script.js` sets `data-theme="dark"` or `"light"` on the page and saves it in `localStorage`.
+---
 
-## Activity Requirements Checklist
+📱 Responsive Design
 
-**Question 1: Product landing page using CSS3 Flexbox and Grid with dark/light mode toggle**
-- [x] Product landing page for ELEVO (`index.html`)
-- [x] Flexbox: navbar, hero, buttons, preview chat, footer
-- [x] Grid: features (1 → 2 → 3 columns), steps and modes (1 → 3 columns)
-- [x] Dark/light mode toggle with CSS variables, saved in `localStorage`
+ELEVO follows a mobile-first approach.
 
-**Question 2: Interactive registration form with CSS animations and real-time client-side validation**
-- [x] Registration form (`register.html`) with 7 validated fields
-- [x] Real-time validation using the `input` event and regular expressions
-- [x] 7 CSS animations using `@keyframes` and transitions
-- [x] Submission blocked until every field is valid
+The interface adapts to:
 
-**Unit 2 manual rules**
-- [x] Raw HTML, CSS and JavaScript; no Bootstrap, Tailwind or other UI framework
-- [x] Mobile layout written first, then `min-width` media queries for larger screens
-- [x] Tested at 320px, 375px, 425px, 768px, 1024px and 1440px with no horizontal scrolling
-- [x] README with Introduction, Features, Technologies Used, Installation, Usage and Future Enhancements
-- [x] Ready for GitHub Pages (`index.html` in the root folder)
+- Mobile phones
+- Tablets
+- Laptops
+- Desktop screens
 
-## Future Enhancements
-- Save accounts and chats in a cloud database so they sync across devices
-- Login page with secure server-side password storage
-- Voice input and spoken replies
-- Mobile app version
-- More topics in the offline knowledge base
+Responsive breakpoints include:
+
+600px
+768px
+1024px
+
+The application was tested across:
+
+320px
+375px
+425px
+768px
+1024px
+1440px
+
+---
+
+🔐 API Security
+
+ELEVO provides an optional Node.js + Express server for handling API requests.
+
+API credentials can be stored using environment variables rather than directly exposing them in frontend code.
+
+Example:
+
+.env
+
+A template is provided:
+
+.env.example
+
+«Never commit a real API key to GitHub.»
+
+---
+
+⚙️ Getting Started
+
+Clone the Repository
+
+git clone https://github.com/madhunandhika/ELEVO-Chat-Box.git
+
+cd ELEVO-Chat-Box
+
+Run the Frontend
+
+No installation is required for the basic frontend.
+
+Open:
+
+index.html
+
+in Chrome, Edge, or another modern browser.
+
+---
+
+Optional Node.js Server
+
+Install Node.js 18 or newer.
+
+Then run:
+
+npm install
+
+Configure your environment variables and start the server:
+
+npm start
+
+Open:
+
+http://localhost:3000
+
+---
+
+🧪 Testing
+
+ELEVO has been tested for:
+
+- Registration validation
+- Password validation
+- Password matching
+- Theme switching
+- Theme persistence
+- Chat interactions
+- Offline chatbot responses
+- AI integration
+- Chat history
+- Image generation
+- Responsive layouts
+- Mobile compatibility
+- Invalid form submissions
+
+---
+
+🌐 GitHub Pages
+
+ELEVO is compatible with GitHub Pages because the frontend does not require a build system.
+
+Live Demo
+
+"https://madhunandhika.github.io/ELEVO-Chat-Box/"
+
+The main entry point is:
+
+index.html
+
+---
+
+🎯 Skills Demonstrated
+
+This project demonstrates practical experience in:
+
+- HTML5
+- CSS3
+- JavaScript
+- Responsive web design
+- Flexbox
+- CSS Grid
+- CSS animations
+- DOM manipulation
+- Event handling
+- Form validation
+- Regular expressions
+- LocalStorage
+- Fetch API
+- Async/await
+- AI API integration
+- Chatbot development
+- Node.js
+- Express.js
+- Git and GitHub
+- GitHub Pages deployment
+
+---
+
+🔮 Future Enhancements
+
+Future versions of ELEVO could include:
+
+- 🔐 Secure user authentication
+- ☁️ Cloud-based chat synchronization
+- 👤 User profiles
+- 🎙️ Voice input
+- 🔊 Spoken chatbot responses
+- 🌍 Multi-language support
+- 📱 Mobile application
+- 🧠 Expanded offline knowledge base
+- 📤 Conversation export
+- 🔄 Cross-device synchronization
+- 🤖 Additional AI model integrations
+
+---
+
+📚 Documentation
+
+Detailed technical documentation is available in:
+
+DOCUMENTATION.md
+
+It contains information about the project's:
+
+- Implementation
+- Features
+- Chatbot workflow
+- Validation system
+- Testing
+- Requirements
+- Future improvements
+
+---
+
+👩‍💻 Developer
+
+Madhunandhika
+
+ELEVO was developed as a practical project to explore web development, chatbot development, responsive UI design, JavaScript, API integration, and AI-powered applications.
+
+---
+
+⭐ Project Highlights
+
+«A responsive AI chatbot built from scratch using HTML, CSS and JavaScript.»
+
+«Supports both offline knowledge-based responses and real AI-generated answers.»
+
+«Includes chat history, image generation, responsive design, dark/light mode and interactive registration.»
+
+---
+
+📄 License
+
+This project is created for educational and portfolio purposes.
