@@ -2,12 +2,6 @@ ELEVO — AI Chatbot
 
 «ELEVO is a lightweight, responsive web-based AI chatbot designed to answer study, coding, mathematics, and everyday questions. It supports offline responses through a built-in knowledge base and can provide real AI-powered answers when an AI API is configured.»
 
-Live Demo: "https://madhunandhika.github.io/ELEVO-Chat-Box/"
-
-Repository: "https://github.com/madhunandhika/ELEVO-Chat-Box"
-
----
-
 🚀 About ELEVO
 
 ELEVO is a web-based chatbot built to provide users with quick and interactive answers across different types of questions.
